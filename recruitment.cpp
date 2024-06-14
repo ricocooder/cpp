@@ -79,11 +79,13 @@ void readFile(string filePath){ //read date from file
         }
         // cout << "results size :" << results.size();
 
-        sort(results.begin()+5, results.end());//sort values in results from 5 to 10 
-        sort(results.begin(), results.end()-5);//sort values in results from 0 to 5 
+        // sort(results.begin()+5, results.end());//sort values in results from 5 to 10 
+        // sort(results.begin(), results.end()-5);//sort values in results from 0 to 5 
         // partial_sort(results.begin()+5, results.begin()+10, results.end());
         vector <int> player1(results.begin(), results.end()-5);//create single vector for player 1
         vector <int> player2(results.begin()+5, results.end());//create single vector for player 2
+        sort(player1.begin(), player1.end());
+        sort(player2.begin(), player2.end());
         for (const auto& p1 : player1){//display vector for player 1
             cout << "\nP1:" << p1;
         }
