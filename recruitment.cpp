@@ -15,7 +15,20 @@ using namespace std;
 string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 // defOrder = {2, 3, 4, 5, 6, 7, 8, 9, 10-T, Jack-J, Queen-Q, King-K, Ace-A}; 
 // list<int> convertOrder = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+void checkPair(vector<int> input, int playerNumber){
+    int count =0;
+    cout << "\ncheckPair";
+     for(int i = 0; i<input.size(); i++){
+           for(int y =0; y<input.size(); y++){
+             if (input[i]==input[y] and i != y){
+                count ++;
+                cout<< "\nwe found pair !!!!! "<<input[i] << "  " <<input[y] << " for player"<< playerNumber;
+                cout << "\nCounter: "<< count; // dla 5 powtorzen - 20; dla 4 powtorzen - 12; dla 4 powtorzen - 6, dla pary -2
+             }
 
+           }
+       }
+}
 int sumFun(int number)
     {
     int sum =0;
@@ -96,6 +109,10 @@ void readFile(string filePath){ //read date from file
         /*
         One pair
         */
+       checkPair(player1, 1);
+
+       checkPair(player2, 2);
+      
 
         /*
         Two pair
