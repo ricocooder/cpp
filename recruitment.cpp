@@ -93,6 +93,42 @@ void readFile(string filePath){ //read date from file
             cout << "\nP2:" << p2;
         }
 
+        /*
+        One pair
+        */
+
+        /*
+        Two pair
+        */
+
+        /*
+        Three
+        */
+
+        /*
+        Straight
+        */
+
+        /*
+        Flush
+        */
+
+        /*
+        Full house
+        */
+
+        /*
+        Straight Flush
+        check if we have max number - 4 == nim number
+        if max number == 14 and abowe we have Royal Flush
+        */
+
+        /*
+        SRoyal Flush
+        check if we have max number - 4 == nim number
+        if max number == 14 and abowe we have Royal Flush
+        */
+
         /*check witch player win if there is no figures
         High Card: Highest value card.*/
         if(player1[4]>player2[4]){
@@ -106,7 +142,7 @@ void readFile(string filePath){ //read date from file
         player1.clear();
         player2.clear();
         
-        cout << "\nNajwyzsza karta gracza 1: " << player1[4]<< "\nNajwyzsza karta gracza 2: " <<player2[4] << "\nWygrywa gracz: " << winner << "\n"; 
+        cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
         }
         
         
