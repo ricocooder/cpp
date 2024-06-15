@@ -29,41 +29,33 @@ string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 
     // }
 
-void checkPair(vector<int> input, int playerNumber){
-    int firstcount =0;
-    int secondcount =0;
-    int firstPair = 0;
-    int secondPair = 0;
+void checkRepeat(vector<int> input, int playerNumber){
     list<int> checkedCardsList;
-    cout << "\ncheckPair";
+    int counterSum=0;
+    cout << "\ncheckPair : ";
      for(int i = 0; i<input.size(); i++){
-        //    for(int y =0; y<input.size(); y++){
-            //  if (find(checkedCardsList.begin(), checkedCardsList.end(), input[i]) == checkedCardsList.end()){
-            //     checkedCardsList.push_back(input[i]);
-            //     cout << "\nPair found " << input[i];
-                cout << "\ninput :" << input[i];
-
-                int countCard = count(checkedCardsList.begin(), checkedCardsList.end(), input[i]);
-                cout << "\nCount :" << countCard;
-                // if(firstPair != input[i]){
-                // firstcount ++;
-                // firstPair = input[i];
-                // cout<< "\nwe found first  pair !!!!! "<<input[i] << "  " <<input[i] << " for player"<< playerNumber;
-                // cout << "\nCounter: "<< firstcount << " Card: " << firstPair; // dla pary powtorzen - 1; dla trojki - 8; dla czworki - 11
-                // }
-                // else{
-                //     secondcount++;
-                //     secondPair = input[i];
-                //     cout<< "\nwe found secound pair !!!!! "<<input[i] << "  " <<input[y] << " for player"<< playerNumber;
-                //     cout << "\nCounter: "<< secondcount << " Card: " << secondPair; // dla 5 powtorzen - 20; dla 4 powtorzen - 12; dla 4 powtorzen - 6, dla pary -2
-                // }
-                // for (int ch : checkedCardsList) {
-                //     cout << "\ndrukuje elementy listy checkedCardsList " << ch << ' ';
-                //     }
-            //  }
-
-        //    }
+        int countRep = count(input.begin(), input.end(), input[i]);
+        counterSum = counterSum+countRep;
+        cout << countRep;
+        // cout << "\n" << counterSum;
        }
+       
+    
+
+            cout << "\ncounterSum: "<<counterSum; //17 - Four of a Kind, 13 - Full House, 11 - Three of a Kind, 7 - One Pair, 9 - Two Pairs
+            switch (counterSum){
+                case 17: cout << "\nFour of a Kind";
+                break;
+                case 13: cout << "\nFull House";
+                break;
+                case 11: cout << "\nThree of a Kind";
+                break;
+                case 9: cout << "\nTwo Pairs";
+                break;
+                case 7: cout << "\nOne Pair";
+                break;
+            }
+
 }
 int sumFun(int number)
     {
@@ -145,7 +137,7 @@ void readFile(string filePath){ //read date from file
         /*
         One pair
         */
-       checkPair(player1, 1);
+       checkRepeat(player1, 1);
 
     //    checkPair(player2, 2);
       
@@ -215,17 +207,8 @@ int main()
     // poker(test);
     // cout << convertOrder;
     
-    vector<int> myList = {1,2,3,4,5,6,6,6,6,6};
-    vector<int> testv = {1, 2, 6};
-    int countList = count(myList.begin(), myList.end(), 6);
-    cout << countList;
-    for(int i = 0; i<myList.size(); i++){
-        cout << "\n" << myList[i];
-        int countv = count(myList.begin(), myList.end(), myList[i]);
-        cout << " " << countv;
+  
 
-    }
-
-    // readFile("data_test.txt");
+    readFile("data_test.txt");
         
 }
