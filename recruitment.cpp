@@ -6,6 +6,8 @@
 #include <map>
 #include <vector>
 #include <sstream>
+#include <algorithm>
+#include <typeinfo>
 
 
 
@@ -15,18 +17,52 @@ using namespace std;
 string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 // defOrder = {2, 3, 4, 5, 6, 7, 8, 9, 10-T, Jack-J, Queen-Q, King-K, Ace-A}; 
 // list<int> convertOrder = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+
+
+    // list<int> myList;
+    // int value = 30;
+    // if(find(myList.begin(), myList.end(), value) != myList.end()){
+    //     cout << "znalazlem " << value << " w liscie";
+    // }
+    // else{
+    //     cout << "nie znalazlem " << value << " w liscie";
+
+    // }
+
 void checkPair(vector<int> input, int playerNumber){
-    int count =0;
+    int firstcount =0;
+    int secondcount =0;
+    int firstPair = 0;
+    int secondPair = 0;
+    list<int> checkedCardsList;
     cout << "\ncheckPair";
      for(int i = 0; i<input.size(); i++){
-           for(int y =0; y<input.size(); y++){
-             if (input[i]==input[y] and i != y){
-                count ++;
-                cout<< "\nwe found pair !!!!! "<<input[i] << "  " <<input[y] << " for player"<< playerNumber;
-                cout << "\nCounter: "<< count; // dla 5 powtorzen - 20; dla 4 powtorzen - 12; dla 4 powtorzen - 6, dla pary -2
-             }
+        //    for(int y =0; y<input.size(); y++){
+            //  if (find(checkedCardsList.begin(), checkedCardsList.end(), input[i]) == checkedCardsList.end()){
+            //     checkedCardsList.push_back(input[i]);
+            //     cout << "\nPair found " << input[i];
+                cout << "\ninput :" << input[i];
 
-           }
+                int countCard = count(checkedCardsList.begin(), checkedCardsList.end(), input[i]);
+                cout << "\nCount :" << countCard;
+                // if(firstPair != input[i]){
+                // firstcount ++;
+                // firstPair = input[i];
+                // cout<< "\nwe found first  pair !!!!! "<<input[i] << "  " <<input[i] << " for player"<< playerNumber;
+                // cout << "\nCounter: "<< firstcount << " Card: " << firstPair; // dla pary powtorzen - 1; dla trojki - 8; dla czworki - 11
+                // }
+                // else{
+                //     secondcount++;
+                //     secondPair = input[i];
+                //     cout<< "\nwe found secound pair !!!!! "<<input[i] << "  " <<input[y] << " for player"<< playerNumber;
+                //     cout << "\nCounter: "<< secondcount << " Card: " << secondPair; // dla 5 powtorzen - 20; dla 4 powtorzen - 12; dla 4 powtorzen - 6, dla pary -2
+                // }
+                // for (int ch : checkedCardsList) {
+                //     cout << "\ndrukuje elementy listy checkedCardsList " << ch << ' ';
+                //     }
+            //  }
+
+        //    }
        }
 }
 int sumFun(int number)
@@ -111,7 +147,7 @@ void readFile(string filePath){ //read date from file
         */
        checkPair(player1, 1);
 
-       checkPair(player2, 2);
+    //    checkPair(player2, 2);
       
 
         /*
@@ -178,6 +214,18 @@ int main()
     // cout << "Suma 1000: " << sumFun(1000) << endl;
     // poker(test);
     // cout << convertOrder;
-    readFile("data_test.txt");
+    
+    vector<int> myList = {1,2,3,4,5,6,6,6,6,6};
+    vector<int> testv = {1, 2, 6};
+    int countList = count(myList.begin(), myList.end(), 6);
+    cout << countList;
+    for(int i = 0; i<myList.size(); i++){
+        cout << "\n" << myList[i];
+        int countv = count(myList.begin(), myList.end(), myList[i]);
+        cout << " " << countv;
+
+    }
+
+    // readFile("data_test.txt");
         
 }
