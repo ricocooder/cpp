@@ -32,6 +32,7 @@ string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 void checkRepeat(vector<int> input, int playerNumber){
     list<int> checkedCardsList;
     int counterSum=0;
+    cout << "\ninput.size() : " << input.size();
     cout << "\ncheckPair : ";
      for(int i = 0; i<input.size(); i++){
         int countRep = count(input.begin(), input.end(), input[i]);
@@ -133,9 +134,9 @@ void readFile(string filePath){ //read date from file
         for (const auto& p2 : player2){//display vector for player 1
             cout << "\nP2:" << p2;
         }
-
         /*
-        One pair
+        TODO One Pair: Two cards of the same value.
+        TODO draw
         */
        checkRepeat(player1, 1);
 
@@ -143,51 +144,68 @@ void readFile(string filePath){ //read date from file
       
 
         /*
-        Two pair
+        TODO Two Pairs: Two different pairs.
+        TODO draw
         */
 
         /*
-        Three
+        TODO Three of a Kind: Three cards of the same value.
+        TODO draw
         */
 
         /*
-        Straight
+        TODO Straight: All cards are consecutive values.
+        TODO draw
         */
 
         /*
-        Flush
+        TODO Flush: All cards of the same suit.
+        TODO draw
         */
 
         /*
-        Full house
+        TODO Full House: Three of a kind and a pair.
+        TODO draw
+        */
+       
+        /*
+        TODO Four of a Kind: Four cards of the same value.
+        TODO draw
         */
 
         /*
-        Straight Flush
+        TODO Straight Flush: All cards are consecutive values of same suit.
+        TODO draw
         check if we have max number - 4 == nim number
         if max number == 14 and abowe we have Royal Flush
         */
 
         /*
-        SRoyal Flush
+        TODO Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+        TODO draw
         check if we have max number - 4 == nim number
         if max number == 14 and abowe we have Royal Flush
         */
-
+        /*
+        TODO High Card: Highest value card.
+        TODO draw
+        */
         /*check witch player win if there is no figures
         High Card: Highest value card.*/
         if(player1[4]>player2[4]){
             winner = "Player1";
         }
-        else if (player1[4]<player2[4])
-        {
+        else if (player1[4]<player2[4]){
             winner = "Player2";
         }
+        
+        cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
+
+
         results.clear();
         player1.clear();
         player2.clear();
         
-        cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
         }
         
         
