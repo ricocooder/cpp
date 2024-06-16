@@ -29,6 +29,26 @@ string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 
     // }
 
+int checkHighestValue(vector <int> player1, vector <int> player2){
+      sort(player1.begin(), player1.end(), greater<int>());
+        sort(player2.begin(), player2.end(), greater<int>());
+        for(size_t i = 0; i < player1.size(); ++i){
+            if(player1[i]==player2[i]){
+            cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Cards are equal";
+            }
+            else if (player1[i] > player2[i])
+            {
+                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player1 Win!";
+            }
+            else if (player1[i] < player2[i])
+            {
+                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player2 Win!";
+            }
+
+        }
+        return 0;
+}    
+
 void checkRepeat(vector<int> player1, vector<int> player2){
     int counterSum1=0;
     int sumCountAndValues1 = 0;
@@ -109,6 +129,7 @@ void checkRepeat(vector<int> player1, vector<int> player2){
             }else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2)
             {
                 cout << "\ncheck highest card";
+                checkHighestValue(player1, player2);
             }
             
             
@@ -152,8 +173,13 @@ void readFile(string filePath){ //read date from file
     charToIntMap['Q'] = 12;
     charToIntMap['K'] = 13;
     charToIntMap['A'] = 14;
+    charToIntMap['S'] = 101;
+    charToIntMap['H'] = 102;
+    charToIntMap['D'] = 103;
+    charToIntMap['C'] = 104;
 
         vector<int> results;
+        vector<int> resultsColor;
         string line;
         int lineCount = 1;
         string winner;
@@ -169,12 +195,22 @@ void readFile(string filePath){ //read date from file
                     results.push_back(charToIntMap[firstChar]);
                 }else{
                     results.push_back(0);
+                } 
+
+                char secChar = word[1];
+                if(charToIntMap.find(secChar) != charToIntMap.end()){
+                    resultsColor.push_back(charToIntMap[secChar]);
+                }else{
+                    resultsColor.push_back(0);
                 }
             }
             cout<<"\n\nNew hand\n";
            for (const auto& res : results){ //display cards
-            cout << res << " ";
-        }
+            cout << "\n" <<res << " ";
+                }
+            for (const auto& resColor : resultsColor){ //display cards
+                cout << "\n" << resColor << " ";
+                }
         // cout << "results size :" << results.size();
 
         // sort(results.begin()+5, results.end());//sort values in results from 5 to 10 
@@ -192,21 +228,21 @@ void readFile(string filePath){ //read date from file
             cout << "\nP2:" << p2;
         }
         /*
-        TODO One Pair: Two cards of the same value.
-        TODO draw
+        TODO One Pair: Two cards of the same value. - DONE
+        TODO draw  - DONE
         */
        checkRepeat(player1, player2);
 
       
 
         /*
-        TODO Two Pairs: Two different pairs.
-        TODO draw
+        TODO Two Pairs: Two different pairs.- DONE
+        TODO draw - DONE
         */
 
         /*
-        TODO Three of a Kind: Three cards of the same value.
-        TODO draw
+        TODO Three of a Kind: Three cards of the same value.- DONE
+        TODO draw - DONE
         */
 
         /*
@@ -220,13 +256,13 @@ void readFile(string filePath){ //read date from file
         */
 
         /*
-        TODO Full House: Three of a kind and a pair.
-        TODO draw
+        TODO Full House: Three of a kind and a pair.- DONE
+        TODO draw - DONE
         */
        
         /*
-        TODO Four of a Kind: Four cards of the same value.
-        TODO draw
+        TODO Four of a Kind: Four cards of the same value.- DONE
+        TODO draw - DONE
         */
 
         /*
@@ -243,8 +279,8 @@ void readFile(string filePath){ //read date from file
         if max number == 14 and abowe we have Royal Flush
         */
         /*
-        TODO High Card: Highest value card.
-        TODO draw
+        TODO High Card: Highest value card. - DONE
+        TODO draw - DONE
         */
         /*check witch player win if there is no figures
         High Card: Highest value card.
@@ -262,22 +298,7 @@ void readFile(string filePath){ //read date from file
         
         // cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
 
-        sort(player1.begin(), player1.end(), greater<int>());
-        sort(player2.begin(), player2.end(), greater<int>());
-        for(size_t i = 0; i < player1.size(); ++i){
-            if(player1[i]==player2[i]){
-            cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Cards are equal";
-            }
-            else if (player1[i] > player2[i])
-            {
-                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player1 Win!";
-            }
-            else if (player1[i] < player2[i])
-            {
-                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player2 Win!";
-            }
-
-        }
+      
 
         results.clear();
         player1.clear();
@@ -295,8 +316,7 @@ void readFile(string filePath){ //read date from file
 
 
 
-int main()
-{
+int main(){
     // sumFun(1000);
     // cout << "Suma 1000: " << sumFun(1000) << endl;
     // poker(test);
