@@ -168,15 +168,15 @@ void readFile(string filePath){ //read date from file
     charToIntMap['7'] = 7;
     charToIntMap['8'] = 8;
     charToIntMap['9'] = 9;
-    charToIntMap['T'] = 10;
-    charToIntMap['J'] = 11;
-    charToIntMap['Q'] = 12;
-    charToIntMap['K'] = 13;
-    charToIntMap['A'] = 14;
-    charToIntMap['S'] = 101;
-    charToIntMap['H'] = 102;
-    charToIntMap['D'] = 103;
-    charToIntMap['C'] = 104;
+    charToIntMap['T'] = 10; // Ten
+    charToIntMap['J'] = 11; // Jack
+    charToIntMap['Q'] = 12; // Queen
+    charToIntMap['K'] = 13; // King
+    charToIntMap['A'] = 14; // Ace
+    charToIntMap['S'] = 101;    // Spad
+    charToIntMap['H'] = 102;    // Heart
+    charToIntMap['D'] = 103;    // Diamond
+    charToIntMap['C'] = 104;    // Club
 
         vector<int> results;
         vector<int> resultsColor;
@@ -190,15 +190,15 @@ void readFile(string filePath){ //read date from file
             string word;
             while (iss>>word)
             {
-                char firstChar = word[0];
-                if(charToIntMap.find(firstChar) != charToIntMap.end()){
+                char firstChar = word[0]; //check first char from world - card
+                if(charToIntMap.find(firstChar) != charToIntMap.end()){ // map card char with number from chartomap
                     results.push_back(charToIntMap[firstChar]);
                 }else{
                     results.push_back(0);
                 } 
 
-                char secChar = word[1];
-                if(charToIntMap.find(secChar) != charToIntMap.end()){
+                char secChar = word[1]; // check second char froem world - color
+                if(charToIntMap.find(secChar) != charToIntMap.end()){// map color char with number from chartomap
                     resultsColor.push_back(charToIntMap[secChar]);
                 }else{
                     resultsColor.push_back(0);
@@ -208,7 +208,7 @@ void readFile(string filePath){ //read date from file
            for (const auto& res : results){ //display cards
             cout << "\n" <<res << " ";
                 }
-            for (const auto& resColor : resultsColor){ //display cards
+            for (const auto& resColor : resultsColor){ //display color
                 cout << "\n" << resColor << " ";
                 }
         // cout << "results size :" << results.size();

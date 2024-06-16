@@ -5,6 +5,18 @@
         "vector": "cpp",
         "map": "cpp",
         "__bit_reference": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "filesystem": "cpp"
     }
 }
