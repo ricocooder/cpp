@@ -29,22 +29,29 @@ string test = "8C TS KC 9H 4S 7D 2S 5D 3S AC";
 
     // }
 
-void checkRepeat(vector<int> input, int playerNumber){
-    list<int> checkedCardsList;
-    int counterSum=0;
-    cout << "\ninput.size() : " << input.size();
-    cout << "\ncheckPair : ";
-     for(int i = 0; i<input.size(); i++){
-        int countRep = count(input.begin(), input.end(), input[i]);
-        counterSum = counterSum+countRep;
-        cout << countRep;
-        // cout << "\n" << counterSum;
+void checkRepeat(vector<int> player1, vector<int> player2){
+    int counterSum1=0;
+    int sumCountAndValues1 = 0;
+    int counterSum2=0;
+    int sumCountAndValues2 = 0;
+    // cout << "\nplayer1.size() : " << player1.size();
+    cout << "\ncheckPair for Player1: ";
+     for(int i = 0; i<player1.size(); i++){
+        int repeat = count(player1.begin(), player1.end(), player1[i]);
+        counterSum1 = counterSum1+repeat;
+        if(repeat > 1){
+            sumCountAndValues1 = sumCountAndValues1 + (repeat*player1[i]);
+        }
+        // cout <<  "\nsumCountAndValues1 = " << sumCountAndValues1 << " Repeat * " << repeat << " player1[i] " << player1[i];
+        cout << repeat;
+
+        // cout << "\n" << counterSum1;
        }
-       
+       cout << "\nsumCountAndValues1 : " << sumCountAndValues1;
     
 
-            cout << "\ncounterSum: "<<counterSum; //17 - Four of a Kind, 13 - Full House, 11 - Three of a Kind, 7 - One Pair, 9 - Two Pairs
-            switch (counterSum){
+            cout << "\ncounterSum1: "<<counterSum1; //17 - Four of a Kind, 13 - Full House, 11 - Three of a Kind, 7 - One Pair, 9 - Two Pairs, 5 no repeat
+            switch (counterSum1){
                 case 17: cout << "\nFour of a Kind";
                 break;
                 case 13: cout << "\nFull House";
@@ -55,7 +62,56 @@ void checkRepeat(vector<int> input, int playerNumber){
                 break;
                 case 7: cout << "\nOne Pair";
                 break;
+                case 5: cout << "\nNo repeat";
+                break;
             }
+    cout << "\ncheckPair for Player2: ";
+     for(int i = 0; i<player2.size(); i++){
+        int repeat = count(player2.begin(), player2.end(), player2[i]);
+        counterSum2 = counterSum2+repeat;
+        if(repeat > 1){
+            sumCountAndValues2 = sumCountAndValues2 + (repeat*player2[i]);
+        }
+        // cout <<  "\nsumCountAndValues1 = " << sumCountAndValues1 << " Repeat * " << repeat << " player1[i] " << player1[i];
+        cout << repeat;
+
+        // cout << "\n" << counterSum1;
+       }
+       cout << "\nsumCountAndValues2 : " << sumCountAndValues2;
+    
+
+            cout << "\ncounterSum2: "<<counterSum2; //17 - Four of a Kind, 13 - Full House, 11 - Three of a Kind, 7 - One Pair, 9 - Two Pairs, 5 no repeat
+            switch (counterSum2){
+                case 17: cout << "\nFour of a Kind";
+                break;
+                case 13: cout << "\nFull House";
+                break;
+                case 11: cout << "\nThree of a Kind";
+                break;
+                case 9: cout << "\nTwo Pairs";
+                break;
+                case 7: cout << "\nOne Pair";
+                break;
+                case 5: cout << "\nNo repeat";
+                break;
+            }
+            if(counterSum1 > counterSum2){
+                cout << "\nPlayer1 win!";
+            }else if (counterSum1 < counterSum2)
+            {
+                cout << "\nPlayer2 win!";
+            }else if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2)
+            {
+                cout << "\nPlayer1 win!";
+            }else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2)
+            {
+                cout << "\nPlayer2 win!";
+            }else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2)
+            {
+                cout << "\ncheck highest card";
+            }
+            
+            
 
 }
 int sumFun(int number)
@@ -128,6 +184,7 @@ void readFile(string filePath){ //read date from file
         vector <int> player2(results.begin()+5, results.end());//create single vector for player 2
         sort(player1.begin(), player1.end());
         sort(player2.begin(), player2.end());
+
         for (const auto& p1 : player1){//display vector for player 1
             cout << "\nP1:" << p1;
         }
@@ -138,9 +195,8 @@ void readFile(string filePath){ //read date from file
         TODO One Pair: Two cards of the same value.
         TODO draw
         */
-       checkRepeat(player1, 1);
+       checkRepeat(player1, player2);
 
-    //    checkPair(player2, 2);
       
 
         /*
@@ -191,16 +247,37 @@ void readFile(string filePath){ //read date from file
         TODO draw
         */
         /*check witch player win if there is no figures
-        High Card: Highest value card.*/
-        if(player1[4]>player2[4]){
-            winner = "Player1";
-        }
-        else if (player1[4]<player2[4]){
-            winner = "Player2";
-        }
+        High Card: Highest value card.
         
-        cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
+        we need to use loop - two player can have same highest card, than we need check second one and so on..... 
+        // */
+        // if(player1[4]>player2[4]){
+        //     winner = "Player1";
+        // }
+        // else if (player1[4]<player2[4]){
+        //     winner = "Player2";
+        // }
 
+        
+        
+        // cout << "\nHighest card Player 1: " << player1[4]<< "\nHighest card Player 2: " <<player2[4] << "\n" << winner << " wins!\n"; 
+
+        sort(player1.begin(), player1.end(), greater<int>());
+        sort(player2.begin(), player2.end(), greater<int>());
+        for(size_t i = 0; i < player1.size(); ++i){
+            if(player1[i]==player2[i]){
+            cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Cards are equal";
+            }
+            else if (player1[i] > player2[i])
+            {
+                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player1 Win!";
+            }
+            else if (player1[i] < player2[i])
+            {
+                cout << "\nSprawdzam karty nr: "<< i << " gracz 1: " << player1[i] << " gracz 2: " << player2[i] << " - Player2 Win!";
+            }
+
+        }
 
         results.clear();
         player1.clear();
