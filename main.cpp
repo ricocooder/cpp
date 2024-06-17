@@ -9,132 +9,89 @@
 #include <typeinfo>
 using namespace std;
 
-bool areConsecutive(vector<int> inputVector)
-{
-
-    for (int i = 1; i < inputVector.size(); ++i)
-    {
-        if (inputVector[i] != inputVector[i - 1] + 1)
-        {
+bool areConsecutive(vector<int> inputVector){
+    for (int i = 1; i < inputVector.size(); ++i){
+        if (inputVector[i] != inputVector[i - 1] + 1){
             return false;
         }
     }
     return true;
 }
 
-void checkIfColor(vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score)
-{
-
-    if (count(player1Color.begin(), player1Color.end(), player1Color[0]) == 5)
-    {
-
+void checkIfColor(vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
+    if (count(player1Color.begin(), player1Color.end(), player1Color[0]) == 5){
         player1Score = 6;
     }
-    if (count(player2Color.begin(), player2Color.end(), player2Color[0]) == 5)
-    {
-
+    if (count(player2Color.begin(), player2Color.end(), player2Color[0]) == 5){
         player2Score = 6;
     }
 }
 
-int checkIfSingleColor(vector<int> playerColor)
-{
-
-    if (count(playerColor.begin(), playerColor.end(), playerColor[0]) == 5)
-    {
-
+int checkIfSingleColor(vector<int> playerColor){
+    if (count(playerColor.begin(), playerColor.end(), playerColor[0]) == 5){
         return true;
     }
     return false;
 }
 
-void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Score, int &player2Score)
-{
+void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Score, int &player2Score){
     // TODO jak wszysto bedzie dzialac i bedzie czas to wywalic braki i dodac if przed for
-
     bool winer = false;
     sort(player1.begin(), player1.end(), greater<int>());
     sort(player2.begin(), player2.end(), greater<int>());
-    for (size_t i = 0; i < player1.size(); ++i)
-    {
-        if (player1[i] == player2[i])
-        {
+    for (size_t i = 0; i < player1.size(); ++i){
+        if (player1[i] == player2[i]) {
         }
-        else if (player1[i] > player2[i])
-        {
+        else if (player1[i] > player2[i]){
             player1Score++;
-
             break;
         }
-        else if (player1[i] < player2[i])
-        {
+        else if (player1[i] < player2[i]) {
             player2Score++;
-
             break;
         }
     }
 }
 
-void straight(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score)
-{
-
-    if (areConsecutive(player1))
-    { // Straight: All cards are consecutive values.
-
+void straight(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
+    if (areConsecutive(player1)){ // Straight: All cards are consecutive values.
         player1Score = 5;
-        if (checkIfSingleColor(player1Color))
-        { // Straight Flush: All cards are consecutive values of same suit.
-
+        if (checkIfSingleColor(player1Color)){ // Straight Flush: All cards are consecutive values of same suit.
             player1Score = 9;
-            if (player1[4] == 14)
-            { // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-
+            if (player1[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
                 player1Score = 10;
             }
         }
     }
-    if (areConsecutive(player2))
-    { // Straight: All cards are consecutive values.
-
+    if (areConsecutive(player2)){ // Straight: All cards are consecutive values.
         player2Score = 5;
-        if (checkIfSingleColor(player2Color))
-        { // Straight Flush: All cards are consecutive values of same suit.
-
+        if (checkIfSingleColor(player2Color)){ // Straight Flush: All cards are consecutive values of same suit.
             player2Score = 9;
-            if (player2[4] == 14)
-            { // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-
+            if (player2[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
                 player2Score = 10;
             }
         }
     }
-    if (player1Score == player2Score)
-    {
+    if (player1Score == player2Score){
         checkHighestValue(player1, player2, player1Score, player2Score);
     }
 }
 
-void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score)
-{
+void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
     // TODO powtorzenia  lepiej zrobic jedna funkcje ale odpalic 2 razy
-
     int counterSum1 = 0;
     int sumCountAndValues1 = 0;
     int counterSum2 = 0;
     int sumCountAndValues2 = 0;
-
-    for (int i = 0; i < player1.size(); i++)
-    {
+    for (int i = 0; i < player1.size(); i++){
         int repeat = count(player1.begin(), player1.end(), player1[i]);
         counterSum1 = counterSum1 + repeat;
-        if (repeat > 1)
-        {
+        if (repeat > 1){
             sumCountAndValues1 = sumCountAndValues1 + (repeat * player1[i]);
         }
     }
 
-    switch (counterSum1)
-    {
+    switch (counterSum1){
     case 17:
         player1Score = 8;
         break;
@@ -154,18 +111,15 @@ void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Co
         break;
     }
 
-    for (int i = 0; i < player2.size(); i++)
-    {
+    for (int i = 0; i < player2.size(); i++){
         int repeat = count(player2.begin(), player2.end(), player2[i]);
         counterSum2 = counterSum2 + repeat;
-        if (repeat > 1)
-        {
+        if (repeat > 1){
             sumCountAndValues2 = sumCountAndValues2 + (repeat * player2[i]);
         }
     }
 
-    switch (counterSum2)
-    {
+    switch (counterSum2){
     case 17:
         player2Score = 8;
         break;
@@ -185,28 +139,20 @@ void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Co
         break;
     }
 
-    if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2)
-    {
-
+    if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2){
         player1Score++;
     }
-    else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2)
-    {
-
+    else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2){
         player2Score++;
     }
-    else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2)
-    {
-
+    else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2){
         checkHighestValue(player1, player2, player1Score, player2Score);
     }
 }
 
-void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &lineCounter)
-{
+void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &lineCounter){
     ifstream inputFile(filePath);
-    if (inputFile.is_open())
-    {
+    if (inputFile.is_open()){
         int player1Score = 0;
         int player2Score = 0;
         map<char, int> charToIntMap;
@@ -229,95 +175,71 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
         charToIntMapColor['D'] = 3; // Diamond
         charToIntMapColor['C'] = 4; // Club
 
-        vector<int> results;
-        vector<int> resultsColor;
+        vector<int> newHand;
+        vector<int> newHandColor;
         string line;
         int lineCount = 1;
         string winner;
 
-        while (getline(inputFile, line))
-        {
+        while (getline(inputFile, line)){
             std::istringstream iss(line);
             string word;
-            while (iss >> word)
-            {
+            while (iss >> word){
                 char firstChar = word[0]; // check first char from world - card
-                if (charToIntMap.find(firstChar) != charToIntMap.end())
-                { // map card char with number from chartomap
-                    results.push_back(charToIntMap[firstChar]);
+                if (charToIntMap.find(firstChar) != charToIntMap.end()){ // map card char with number from chartomap
+                    newHand.push_back(charToIntMap[firstChar]);
                 }
-                else
-                {
-                    results.push_back(0);
+                else{
+                    newHand.push_back(0);
                 }
 
                 char secChar = word[1]; // check second char froem world - color
-                if (charToIntMapColor.find(secChar) != charToIntMapColor.end())
-                { // map color char with number from chartomap
-                    resultsColor.push_back(charToIntMapColor[secChar]);
+                if (charToIntMapColor.find(secChar) != charToIntMapColor.end()){ // map color char with number from chartomap
+                    newHandColor.push_back(charToIntMapColor[secChar]);
                 }
-                else
-                {
-                    resultsColor.push_back(0);
+                else{
+                    newHandColor.push_back(0);
                 }
             }
             cout << "\n\nNew hand\n";
-            for (const auto &res : results)
-            { // display cards
-                cout << res << " ";
+            for (auto card : newHand){ // display cards
+                cout << card << " ";
             }
 
             cout << "\n";
-            for (const auto &resColor : resultsColor)
-            { // display color
-                cout << resColor << " ";
+            for (auto cardColor : newHandColor){ // display color
+                cout << cardColor << " ";
             }
-            // TODO zamienisc result na bardziej jednoznaczna nazwe np: tenCards
-            vector<int> player1(results.begin(), results.end() - 5);                // create single vector for player 1 Cards
-            vector<int> player2(results.begin() + 5, results.end());                // create single vector for player 2 Cards
-            vector<int> player1Color(resultsColor.begin(), resultsColor.end() - 5); // create single vector for player 1 Color
-            vector<int> player2Color(resultsColor.begin() + 5, resultsColor.end()); // create single vector for player 2 Color
+            vector<int> player1(newHand.begin(), newHand.end() - 5);                // create single vector for player 1 Cards
+            vector<int> player2(newHand.begin() + 5, newHand.end());                // create single vector for player 2 Cards
+            vector<int> player1Color(newHandColor.begin(), newHandColor.end() - 5); // create single vector for player 1 Color
+            vector<int> player2Color(newHandColor.begin() + 5, newHandColor.end()); // create single vector for player 2 Color
             sort(player1.begin(), player1.end());
             sort(player2.begin(), player2.end());
 
-            // for (const auto& p1 : player1){//display vector for player 1
-            //     cout << "\nP1:" << p1;
-            // }
-            // for (const auto& p2 : player2){//display vector for player 1
-            //     cout << "\nP2:" << p2;
-            // }
             checkRepeat(player1, player2, player1Color, player2Color, player1Score, player2Score);
-            if (player1Score < 2 or player2Score < 2)
-            {
-
+            if (player1Score < 2 or player2Score < 2){
                 straight(player1, player2, player1Color, player2Color, player1Score, player2Score);
-
-                if (player1Score < 6 or player2Score < 6)
-                {
+                if (player1Score < 6 or player2Score < 6){
                     checkIfColor(player1Color, player2Color, player1Score, player2Score);
                 }
             }
             cout << "Player1 score: " << player1Score << "   " << "Player2 score: " << player2Score;
-            if (player1Score > player2Score)
-            {
+            if (player1Score > player2Score){
                 cout << "\nPlayer1 - Win !";
                 player1WinCount++;
             }
-            else if (player1Score < player2Score)
-            {
+            else if (player1Score < player2Score){
                 cout << "\nPlayer2 - Win !";
                 player2WinCount++;
             }
-            else
-            {
+            else{
                 cout << "\n $$$$$$$$$$$$$$$$$$$$$$$$$$$$  Breake!!!!  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$";
                 break;
             }
-
             lineCounter++;
-
-            results.clear();
-            resultsColor.clear();
+            newHand.clear();
+            newHandColor.clear();
             player1.clear();
             player2.clear();
             player1Color.clear();
