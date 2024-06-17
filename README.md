@@ -2,16 +2,16 @@
 https://projecteuler.net/problem=54
 
 <p>In the card game poker, a hand consists of five cards and are ranked, from lowest to highest, in the following way:</p>
-<ul><li><b>High Card</b>: Highest value card.</li>
-<li><b>One Pair</b>: Two cards of the same value.</li>
-<li><b>Two Pairs</b>: Two different pairs.</li>
-<li><b>Three of a Kind</b>: Three cards of the same value.</li>
-<li><b>Straight</b>: All cards are consecutive values.</li>
-<li><b>Flush</b>: All cards of the same suit.</li>
-<li><b>Full House</b>: Three of a kind and a pair.</li>
-<li><b>Four of a Kind</b>: Four cards of the same value.</li>
-<li><b>Straight Flush</b>: All cards are consecutive values of same suit.</li>
-<li><b>Royal Flush</b>: Ten, Jack, Queen, King, Ace, in same suit.</li>
+<ul><li><b>High Card</b>: Highest value card. Score = 1</li>
+<li><b>One Pair</b>: Two cards of the same value. Score = 2</li>
+<li><b>Two Pairs</b>: Two different pairs. Score = 3</li>
+<li><b>Three of a Kind</b>: Three cards of the same value. Score = 4</li>
+<li><b>Straight</b>: All cards are consecutive values. Score = 5</li>
+<li><b>Flush</b>: All cards of the same suit. Score = 6</li>
+<li><b>Full House</b>: Three of a kind and a pair. Score = 7</li>
+<li><b>Four of a Kind</b>: Four cards of the same value. Score = 8</li>
+<li><b>Straight Flush</b>: All cards are consecutive values of same suit. Score = 9</li>
+<li><b>Royal Flush</b>: Ten, Jack, Queen, King, Ace, in same suit. Score = 10</li>
 </ul><p>The cards are valued in the order:<br>2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace.</p>
 <p>If two players have the same ranked hands then the rank made up of the highest value wins; for example, a pair of eights beats a pair of fives (see example 1 below). But if two ranks tie, for example, both players have a pair of queens, then highest cards in each hand are compared (see example 4 below); if the highest cards tie then the next highest cards are compared, and so on.</p>
 <p>Consider the following five hands dealt to two players:</p>
