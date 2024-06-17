@@ -40,14 +40,14 @@ void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Sco
     sort(player1.begin(), player1.end(), greater<int>());
     sort(player2.begin(), player2.end(), greater<int>());
     for (size_t i = 0; i < player1.size(); ++i){
-        if (player1[i] == player2[i]) {
+        if (player1[i] == player2[i]){
         }
         else if (player1[i] > player2[i]){
-            player1Score++;
+            player1Score ++;
             break;
         }
-        else if (player1[i] < player2[i]) {
-            player2Score++;
+        else if (player1[i] < player2[i]){
+            player2Score ++;
             break;
         }
     }
@@ -92,19 +92,19 @@ void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Co
     }
 
     switch (counterSum1){
-    case 17:
+    case 17: //Four of a Kind: Four cards of the same value.
         player1Score = 8;
         break;
-    case 13:
+    case 13: //Full House: Three of a kind and a pair.
         player1Score = 7;
         break;
-    case 11:
+    case 11: //Three of a Kind: Three cards of the same value.
         player1Score = 4;
         break;
-    case 9:
+    case 9: //Two Pairs: Two different pairs.
         player1Score = 3;
         break;
-    case 7:
+    case 7: //One Pair: Two cards of the same value.
         player1Score = 2;
         break;
     case 5:
@@ -120,19 +120,19 @@ void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Co
     }
 
     switch (counterSum2){
-    case 17:
+    case 17: //Four of a Kind: Four cards of the same value.
         player2Score = 8;
         break;
-    case 13:
+    case 13: //Full House: Three of a kind and a pair.
         player2Score = 7;
         break;
-    case 11:
+    case 11: //Three of a Kind: Three cards of the same value.
         player2Score = 4;
         break;
-    case 9:
+    case 9: //Two Pairs: Two different pairs.
         player2Score = 3;
         break;
-    case 7:
+    case 7: //One Pair: Two cards of the same value.
         player2Score = 2;
         break;
     case 5:
