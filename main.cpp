@@ -35,7 +35,6 @@ int checkIfSingleColor(vector<int> playerColor){
 }
 
 void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Score, int &player2Score){
-    // TODO jak wszysto bedzie dzialac i bedzie czas to wywalic braki i dodac if przed for
     bool winer = false;
     sort(player1.begin(), player1.end(), greater<int>());
     sort(player2.begin(), player2.end(), greater<int>());
@@ -78,7 +77,6 @@ void straight(vector<int> player1, vector<int> player2, vector<int> player1Color
 }
 
 void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
-    // TODO powtorzenia  lepiej zrobic jedna funkcje ale odpalic 2 razy
     int counterSum1 = 0;
     int sumCountAndValues1 = 0;
     int counterSum2 = 0;
@@ -132,7 +130,7 @@ void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Co
     case 9: //Two Pairs: Two different pairs.
         player2Score = 3;
         break;
-    case 7: //One Pair: Two cards of the same value.
+    case 7: 
         player2Score = 2;
         break;
     case 5:
