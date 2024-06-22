@@ -7,6 +7,7 @@
 #include <sstream>
 #include <algorithm>
 #include <typeinfo>
+#include <chrono>
 using namespace std;
 
 enum class repRank{
@@ -228,6 +229,7 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
 
 int main()
 {
+    auto start = chrono::high_resolution_clock::now();
     int player1WinCount = 0;
     int player2WinCount = 0;
     int lineCounter = 0;
@@ -236,4 +238,7 @@ int main()
     cout << "\nplayer2WinCount: " << player2WinCount;
     cout << "\nsum: " << player2WinCount + player1WinCount;
     cout << "\nlineCounter: " << lineCounter;
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    cout << "\nTime taken by function: " << duration.count() << " microseconds";
 }
