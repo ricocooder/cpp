@@ -27,11 +27,8 @@ void checkIfColor(vector<int> player1Color, vector<int> player2Color, int &playe
     }
 }
 
-int checkIfSingleColor(vector<int> playerColor){
-    if (count(playerColor.begin(), playerColor.end(), playerColor[0]) == 5){
-        return true;
-    }
-    return false;
+bool checkIfSingleColor(vector<int> playerColor){
+        return (count(playerColor.begin(), playerColor.end(), playerColor[0]) == 5);
 }
 
 void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Score, int &player2Score){
