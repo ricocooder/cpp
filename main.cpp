@@ -49,6 +49,7 @@ void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Sco
     }
 }
 
+
 void straightSinglePlayer(vector<int> player, vector<int> playerColor, int &playerScore){
     if (areConsecutive(player)){ // Straight: All cards are consecutive values.
         playerScore = 5;
@@ -61,29 +62,29 @@ void straightSinglePlayer(vector<int> player, vector<int> playerColor, int &play
     }
 }
 
-void straight(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
-    if (areConsecutive(player1)){ // Straight: All cards are consecutive values.
-        player1Score = 5;
-        if (checkIfSingleColor(player1Color)){ // Straight Flush: All cards are consecutive values of same suit.
-            player1Score = 9;
-            if (player1[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-                player1Score = 10;
-            }
-        }
-    }
-    if (areConsecutive(player2)){ // Straight: All cards are consecutive values.
-        player2Score = 5;
-        if (checkIfSingleColor(player2Color)){ // Straight Flush: All cards are consecutive values of same suit.
-            player2Score = 9;
-            if (player2[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-                player2Score = 10;
-            }
-        }
-    }
-    if (player1Score == player2Score){
-        checkHighestValue(player1, player2, player1Score, player2Score);
-    }
-}
+// void straight(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
+//     if (areConsecutive(player1)){ // Straight: All cards are consecutive values.
+//         player1Score = 5;
+//         if (checkIfSingleColor(player1Color)){ // Straight Flush: All cards are consecutive values of same suit.
+//             player1Score = 9;
+//             if (player1[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+//                 player1Score = 10;
+//             }
+//         }
+//     }
+//     if (areConsecutive(player2)){ // Straight: All cards are consecutive values.
+//         player2Score = 5;
+//         if (checkIfSingleColor(player2Color)){ // Straight Flush: All cards are consecutive values of same suit.
+//             player2Score = 9;
+//             if (player2[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+//                 player2Score = 10;
+//             }
+//         }
+//     }
+//     if (player1Score == player2Score){
+//         checkHighestValue(player1, player2, player1Score, player2Score);
+//     }
+// }
 
 // void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
 //     int counterSum1 = 0;
@@ -300,7 +301,14 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
                     checkHighestValue(player1, player2, player1Score, player2Score);
                     }
                 if (player1Score < 6 or player2Score < 6){
-                    checkIfColor(player1Color, player2Color, player1Score, player2Score);
+
+                    if (checkIfSingleColor(player1)){
+                        player1Score = 6;
+                    }
+                    if (checkIfSingleColor(player2)){
+                        player2Score = 6;
+                    }
+                    // checkIfColor(player1Color, player2Color, player1Score, player2Score);
                 }
             }
 
