@@ -238,6 +238,7 @@ int main()
     cout << "\nplayer2WinCount: " << player2WinCount;
     cout << "\nsum: " << player2WinCount + player1WinCount;
     cout << "\nlineCounter: " << lineCounter;
+    
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
     cout << "\nTime taken by function: " << duration.count() << " microseconds";
