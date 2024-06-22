@@ -73,81 +73,118 @@ void straight(vector<int> player1, vector<int> player2, vector<int> player1Color
     }
 }
 
-void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
-    int counterSum1 = 0;
-    int sumCountAndValues1 = 0;
-    int counterSum2 = 0;
-    int sumCountAndValues2 = 0;
-    for (int i = 0; i < player1.size(); i++){
-        int repeat = count(player1.begin(), player1.end(), player1[i]);
-        counterSum1 = counterSum1 + repeat;
+// void checkRepeat(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
+//     int counterSum1 = 0;
+//     int sumCountAndValues1 = 0;
+//     int counterSum2 = 0;
+//     int sumCountAndValues2 = 0;
+//     for (int i = 0; i < player1.size(); i++){
+//         int repeat = count(player1.begin(), player1.end(), player1[i]);
+//         counterSum1 = counterSum1 + repeat;
+//         if (repeat > 1){
+//             sumCountAndValues1 = sumCountAndValues1 + (repeat * player1[i]);
+//         }
+//     }
+
+//     switch (counterSum1){
+//     case 17: //Four of a Kind: Four cards of the same value.
+//         player1Score = 8;
+//         break;
+//     case 13: //Full House: Three of a kind and a pair.
+//         player1Score = 7;
+//         break;
+//     case 11: //Three of a Kind: Three cards of the same value.
+//         player1Score = 4;
+//         break;
+//     case 9: //Two Pairs: Two different pairs.
+//         player1Score = 3;
+//         break;
+//     case 7: //One Pair: Two cards of the same value.
+//         player1Score = 2;
+//         break;
+//     case 5:
+//         break;
+//     }
+
+//     for (int i = 0; i < player2.size(); i++){
+//         int repeat = count(player2.begin(), player2.end(), player2[i]);
+//         counterSum2 = counterSum2 + repeat;
+//         if (repeat > 1){
+//             sumCountAndValues2 = sumCountAndValues2 + (repeat * player2[i]);
+//         }
+//     }
+
+//     switch (counterSum2){
+//     case 17: //Four of a Kind: Four cards of the same value.
+//         player2Score = 8;
+//         break;
+//     case 13: //Full House: Three of a kind and a pair.
+//         player2Score = 7;
+//         break;
+//     case 11: //Three of a Kind: Three cards of the same value.
+//         player2Score = 4;
+//         break;
+//     case 9: //Two Pairs: Two different pairs.
+//         player2Score = 3;
+//         break;
+//     case 7: 
+//         player2Score = 2;
+//         break;
+//     case 5:
+//         break;
+//     }
+
+//     if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2){
+//         player1Score++;
+//     }
+//     else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2){
+//         player2Score++;
+//     }
+//     else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2){
+//         checkHighestValue(player1, player2, player1Score, player2Score);
+//     }
+// }
+
+
+void checkRepeatForSinglePlayer(vector<int> player, vector<int> playerColor, int &playerScore, int& counterSum,int& sumCountAndValues){
+    // int counterSum = 0;
+    // int sumCountAndValues = 0;
+    for (int i = 0; i < player.size(); i++){
+        int repeat = count(player.begin(), player.end(), player[i]);
+        counterSum = counterSum + repeat;
         if (repeat > 1){
-            sumCountAndValues1 = sumCountAndValues1 + (repeat * player1[i]);
+            sumCountAndValues = sumCountAndValues + (repeat * player[i]);
         }
     }
 
-    switch (counterSum1){
+    switch (counterSum){
     case 17: //Four of a Kind: Four cards of the same value.
-        player1Score = 8;
+        playerScore = 8;
         break;
     case 13: //Full House: Three of a kind and a pair.
-        player1Score = 7;
+        playerScore = 7;
         break;
     case 11: //Three of a Kind: Three cards of the same value.
-        player1Score = 4;
+        playerScore = 4;
         break;
     case 9: //Two Pairs: Two different pairs.
-        player1Score = 3;
+        playerScore = 3;
         break;
     case 7: //One Pair: Two cards of the same value.
-        player1Score = 2;
+        playerScore = 2;
         break;
     case 5:
         break;
-    }
-
-    for (int i = 0; i < player2.size(); i++){
-        int repeat = count(player2.begin(), player2.end(), player2[i]);
-        counterSum2 = counterSum2 + repeat;
-        if (repeat > 1){
-            sumCountAndValues2 = sumCountAndValues2 + (repeat * player2[i]);
-        }
-    }
-
-    switch (counterSum2){
-    case 17: //Four of a Kind: Four cards of the same value.
-        player2Score = 8;
-        break;
-    case 13: //Full House: Three of a kind and a pair.
-        player2Score = 7;
-        break;
-    case 11: //Three of a Kind: Three cards of the same value.
-        player2Score = 4;
-        break;
-    case 9: //Two Pairs: Two different pairs.
-        player2Score = 3;
-        break;
-    case 7: 
-        player2Score = 2;
-        break;
-    case 5:
-        break;
-    }
-
-    if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2){
-        player1Score++;
-    }
-    else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2){
-        player2Score++;
-    }
-    else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2){
-        checkHighestValue(player1, player2, player1Score, player2Score);
     }
 }
 
 void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &lineCounter){
     ifstream inputFile(filePath);
     if (inputFile.is_open()){
+        int counterSum1 = 0;
+        int counterSum2 = 0;
+        int sumCountAndValues1 =0;
+        int sumCountAndValues2 =0;
         int player1Score = 0;
         int player2Score = 0;
         map<char, int> charToIntMap;
@@ -212,7 +249,31 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
             sort(player1.begin(), player1.end());
             sort(player2.begin(), player2.end());
 
-            checkRepeat(player1, player2, player1Color, player2Color, player1Score, player2Score);
+            // checkRepeat(player1, player2, player1Color, player2Color, player1Score, player2Score);
+
+            //*********************************************************************** */
+
+
+            cout << "\ncheckRepeatForSinglePlayer for player 1";
+            checkRepeatForSinglePlayer(player1, player1Color, player1Score, counterSum1, sumCountAndValues1);
+            cout << "\ncheckRepeatForSinglePlayer for player 1 return: " << " : " << counterSum1 << "  sumCountAndValues1 : " << sumCountAndValues1;
+            cout << "\ncheckRepeatForSinglePlayer for player 2";
+            checkRepeatForSinglePlayer(player2, player2Color, player2Score, counterSum2, sumCountAndValues2);
+            cout << "\ncheckRepeatForSinglePlayer for player 2 return: " << " : " << counterSum2 << "  sumCountAndValues2 : " << sumCountAndValues2;
+
+            if (counterSum1 == counterSum2 and sumCountAndValues1 > sumCountAndValues2){
+                player1Score++;
+            }
+            else if (counterSum1 == counterSum2 and sumCountAndValues1 < sumCountAndValues2){
+                player2Score++;
+            }
+            else if (counterSum1 == counterSum2 and sumCountAndValues1 == sumCountAndValues2){
+                checkHighestValue(player1, player2, player1Score, player2Score);
+            }
+
+
+            //*********************************************************************** */
+
             if (player1Score < 2 or player2Score < 2){
                 straight(player1, player2, player1Color, player2Color, player1Score, player2Score);
                 if (player1Score < 6 or player2Score < 6){
@@ -233,6 +294,10 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
                 break;
             }
             lineCounter++;
+            counterSum1 = 0;
+            counterSum2 = 0;
+            sumCountAndValues1 =0;
+            sumCountAndValues2 =0;
             newHand.clear();
             newHandColor.clear();
             player1.clear();
