@@ -49,6 +49,18 @@ void checkHighestValue(vector<int> player1, vector<int> player2, int &player1Sco
     }
 }
 
+void straightSinglePlayer(vector<int> player, vector<int> playerColor, int &playerScore){
+    if (areConsecutive(player)){ // Straight: All cards are consecutive values.
+        playerScore = 5;
+        if (checkIfSingleColor(playerColor)){ // Straight Flush: All cards are consecutive values of same suit.
+            playerScore = 9;
+            if (player[4] == 14){ // Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+                playerScore = 10;
+            }
+        }
+    }
+}
+
 void straight(vector<int> player1, vector<int> player2, vector<int> player1Color, vector<int> player2Color, int &player1Score, int &player2Score){
     if (areConsecutive(player1)){ // Straight: All cards are consecutive values.
         player1Score = 5;
@@ -274,12 +286,25 @@ void readFile(string filePath, int &player1WinCount, int &player2WinCount, int &
 
             //*********************************************************************** */
 
+            // if (player1Score < 2 or player2Score < 2){
+            //     straight(player1, player2, player1Color, player2Color, player1Score, player2Score);
+            //     if (player1Score < 6 or player2Score < 6){
+            //         checkIfColor(player1Color, player2Color, player1Score, player2Score);
+            //     }
+            // }
+
             if (player1Score < 2 or player2Score < 2){
-                straight(player1, player2, player1Color, player2Color, player1Score, player2Score);
+                straightSinglePlayer(player1, player1Color, player1Score);
+                straightSinglePlayer(player2, player2Color, player2Score);
+                if (player1Score == player2Score){
+                    checkHighestValue(player1, player2, player1Score, player2Score);
+                    }
                 if (player1Score < 6 or player2Score < 6){
                     checkIfColor(player1Color, player2Color, player1Score, player2Score);
                 }
             }
+
+
             cout << "Player1 score: " << player1Score << "   " << "Player2 score: " << player2Score;
             if (player1Score > player2Score){
                 cout << "\nPlayer1 - Win !";
